@@ -84,6 +84,28 @@ func RemovePerson() {
 
 }
 
+func CheckPerson1() *Person {
+	var name string
+	fmt.Println("请输入要查询的联系人的姓名")
+	var index int = -1
+	fmt.Scan(&name)
+	for key, value := range personList {
+		if value.userName == name {
+			index = key
+			fmt.Println("联系人姓名：", name)
+			fmt.Printf("%s电话为：%s", key, value)
+			fmt.Println()
+		}
+	}
+	if index == -1 {
+		fmt.Println("没有找到联系人信息")
+		return nil
+	} else {
+		return &personList[index]
+	}
+
+}
+
 func CheckPerson() {
 	var name string
 	fmt.Println("请输入要查询的联系人姓名")
@@ -122,6 +144,23 @@ func EditPerson() {
 		}
 	}
 	showPersonList(personList)
+}
+
+func EditPerson1() {
+	var name string
+	var p *Person
+	p = CheckPerson1()
+	if p != nil {
+		fmt.Println("请输入新的姓名：")
+		fmt.Scan(&name)
+		p.userName = name
+		showPersonList(personList)
+		//编辑用户名称请按5 编辑电话请按6 退出请按7
+		//编辑学校电话请按0
+		//编辑家里电话请按1
+	} else {
+		fmt.Println("没有查到要编辑的联系人信息")
+	}
 }
 
 func main() {
